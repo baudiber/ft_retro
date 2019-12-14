@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 10:24:54 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 12:06:32 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 14:34:03 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,41 @@ GameObject		*List::pop(GameObject *elem)
 	return (0);
 }
 
+GameObject		*List::pop(Elem *elem)
+{
+	GameObject	*o;
+
+	if (elem)
+	{
+		if (elem->_prev)
+			elem->_prev->_next = elem->_next;
+		else
+			this->_first = elem->_next;
+		if (elem->_next)
+			elem->_next->_prev = elem->_prev;
+		else
+			this->_last = elem->_prev;
+		o = elem->_data;
+		this->_size--;
+		delete (elem);
+		return (o);
+	}
+	return (0);
+}
+
+void			List::push(GameObject *o)
+{
+	Elem		*e = new Elem(o);
+
+	if (this->_size == 0)
+		this->_first = e;
+	else
+		this->_last->_next = e;
+	this->_size++;
+	e->_prev = this->_last;
+	this->_last = e;
+}
+
 List::~List(void)
 {
 	Elem		*i;
@@ -82,6 +117,7 @@ List::~List(void)
 	{
 		j = i;
 		i = i->_next;
+		this->_size--;
 		delete (j);
 	}
 	return ;

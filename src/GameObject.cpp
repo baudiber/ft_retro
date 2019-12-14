@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:42:38 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 09:42:56 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 13:21:51 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,14 @@ Vect2				GameObject::getPos()
 Vect2				GameObject::getDir()
 {
 	return (this->_dir);
+}
+
+GameObject			*GameObject::collide(GameObject *o)
+{
+	if (this != o && (int)o->_pos._x == (int)this->_pos._x && \
+	(int)o->_pos._y == (int)this->_pos._y)
+		return (o);
+	return (0);
 }
 
 void				GameObject::process(float const t)

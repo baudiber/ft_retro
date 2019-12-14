@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 10:25:03 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 12:06:17 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 14:39:05 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define LIST_HPP
 
 # include "Elem.hpp"
-# include "GameObject.hpp"
 
 class List
 {
@@ -28,6 +27,8 @@ class List
 		~List(void);
 		// void		push(GameEntity *e);
 		GameObject	*pop(GameObject *elem);
+		GameObject	*pop(Elem *elem);
+		void		push(GameObject *o);
 		List		&operator<<(GameObject *e);
 };
 

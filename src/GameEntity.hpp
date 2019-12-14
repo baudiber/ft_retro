@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 12:40:59 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 10:13:02 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 14:43:20 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ class GameEntity : public GameObject
 		int				_hp_max;
 		int				_ep;
 		int				_ep_max;
-		char			_actual_sprite;
 		// static long		_last;
 	public:
 		GameEntity(void);
 		GameEntity(GameEntity const &src);
 		GameEntity		operator=(GameEntity const &rh);
 		~GameEntity();
+		char			actualSprite();
 		void			takeDamage(int amount);
 };
 

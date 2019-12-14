@@ -6,14 +6,14 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 10:37:50 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 11:28:39 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 14:39:20 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ELEM_HPP
 # define ELEM_HPP
 
-# include "GameObject.hpp"
+class GameObject;
 
 class Elem
 {

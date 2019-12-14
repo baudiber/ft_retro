@@ -6,7 +6,7 @@
 #    By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 12:37:39 by mbuch             #+#    #+#              #
-#    Updated: 2019/12/14 11:50:46 by mbuch            ###   ########.fr        #
+#    Updated: 2019/12/14 12:49:04 by mbuch            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS			= main.cpp \
 			GameObject.cpp \
 			GameEntity.cpp \
 			Projectile.cpp \
+			Player.cpp \
 			Enemy.cpp \
 			Engine.cpp
 
