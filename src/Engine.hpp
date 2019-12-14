@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:50:27 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 14:56:16 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 17:47:27 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@
 
 class Engine
 {
+	private:
+		int				_win_w;
+		int				_win_h;
+		int				_enemy_nb;
+		int				_projectile_nb;
+		WINDOW*			_win;
+
 	public:
 		Engine(void);
 		Engine(Engine const &src);
@@ -34,6 +41,11 @@ class Engine
 		Projectile		_projectiles[MAX_PROJECT];
 		GameEntity		_player;
 		void			addProjectile(Weapon *w);
+		int				get();
+		
+		void			render(void) const;
+		void			displayMenu(void) const;
+		void			run(void) const;
 };
 
 #endif
