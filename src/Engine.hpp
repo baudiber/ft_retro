@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:50:27 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 17:47:27 by baudiber         ###   ########.fr       */
+/*   Updated: 2019/12/14 20:17:29 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class Engine
 		int				_win_h;
 		int				_enemy_nb;
 		int				_projectile_nb;
+		int				_score;
 		WINDOW*			_win;
 
 	public:
@@ -45,7 +46,9 @@ class Engine
 		
 		void			render(void) const;
 		void			displayMenu(void) const;
-		void			run(void) const;
+		void			run(void);
+		void			error(std::string const & msg);
+		void			gameOver(void);
 };
 
 #endif
