@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 13:59:23 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 14:48:54 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 15:41:44 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,3 @@ Projectile			&Projectile::operator=(Projectile const &rh)
 	this->_source = rh._source;
 	return (*this);
 }
-
