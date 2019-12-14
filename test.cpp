@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Enemy.hpp                                          :+:      :+:    :+:   */
+/*   test.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/14 11:54:18 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 12:00:00 by mbuch            ###   ########.fr       */
+/*   Created: 2019/12/14 11:20:00 by mbuch             #+#    #+#             */
+/*   Updated: 2019/12/14 11:42:01 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENEMY_HPP
-# define ENEMY_HPP
+#include "src/List.hpp"
+#include "src/GameEntity.hpp"
 
-# include "GameEntity.hpp"
-# include "Projectile.hpp"
-# include "List.hpp"
+#include <iostream>
 
-class Enemy : public GameEntity
+int main()
 {
-	public:
-		static List	lst;
-		int			_level;
-		Enemy(void);
-		Enemy(Enemy const &src);
-		Enemy		&operator=(Enemy &rh);
-		~Enemy();
-		void			attack();
-};
+	List	lst;
+	Elem	*i;
+	GameEntity e1;
+	GameEntity e2;
+	GameEntity e3;
+	GameEntity e4;
 
-#endif
+	lst << &e4 << &e1 << &e2 << &e3;
+	i = lst._first;
+	while (i)
+	{
+		std::cout << "Loop" << std::endl;
+		i = i->_next;
+	}
+	return (0);
+}

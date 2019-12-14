@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Engine.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/14 17:47:24 by baudiber         ###   ########.fr       */
+/*   Updated: 2019/12/14 12:15:09 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Engine.hpp"
 
-Engine::Engine(void) : _enemy_nb(0), _projectile_nb(0) {
+Engine::Engine(void) {
 	std::cout << "Engine Default constructor called" << std::endl;
 	this->_win = initscr();
 	keypad(this->_win, true);
@@ -54,11 +54,7 @@ Engine &		Engine::operator=(Engine const & rhs) {
 	return *this;
 }
 
-void			Engine::addProjectile(Weapon *w) {
-
-}
-
-void			Engine::run(void) {
+void			Engine::run(void) const {
 	for (;;)
 	{
 		//check for game over

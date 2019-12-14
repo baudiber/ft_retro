@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:43:14 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 14:04:35 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 09:42:35 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ class GameObject
 		GameObject(GameObject const &src);
 		GameObject		operator=(GameObject const &rh);
 		~GameObject();
+		Vect2			getPos();
+		Vect2			getDir();
 		void			move(Vect2 const &v);
 		virtual void	process(float const t);
 };

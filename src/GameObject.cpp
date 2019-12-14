@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:42:38 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 13:46:51 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 09:42:56 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@ void				GameObject::move(Vect2 const &v)
 	if (this->_state == STATE_DEAD)
 		return ;
 	this->_mov = v.normalized();
+}
+
+Vect2				GameObject::getPos()
+{
+	return (this->_pos);
+}
+
+Vect2				GameObject::getDir()
+{
+	return (this->_dir);
 }
 
 void				GameObject::process(float const t)

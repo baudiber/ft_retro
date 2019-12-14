@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Projectile.hpp                                     :+:      :+:    :+:   */
+/*   Elem.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/14 13:59:42 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 11:58:55 by mbuch            ###   ########.fr       */
+/*   Created: 2019/12/14 10:37:50 by mbuch             #+#    #+#             */
+/*   Updated: 2019/12/14 11:28:39 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROJECTILE_HPP
-# define PROJECTILE_HPP
+#ifndef ELEM_HPP
+# define ELEM_HPP
 
 # include "GameObject.hpp"
-# include "GameEntity.hpp"
-# include "List.hpp"
 
-class Projectile : public GameObject
+class Elem
 {
-	private:
-		int				_damage;
-		GameEntity		*_source;
 	public:
-		static List		lst;
-		Projectile(void);
-		Projectile(Projectile const &src);
-		Projectile(GameEntity *src);
-		void			setDamage(int amount);
-		Projectile		&operator=(Projectile const &rh);
-		~Projectile();
-		void			process(float const t);
+		GameObject	*_data;
+		Elem		*_next;
+		Elem		*_prev;
+		Elem(void);
+		Elem(Elem const &src);
+		Elem(GameObject *data);
+		Elem		&operator=(Elem const &rh);
+		~Elem(void);
 };
 
 #endif

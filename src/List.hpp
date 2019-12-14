@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Projectile.hpp                                     :+:      :+:    :+:   */
+/*   List.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/14 13:59:42 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 11:58:55 by mbuch            ###   ########.fr       */
+/*   Created: 2019/12/14 10:25:03 by mbuch             #+#    #+#             */
+/*   Updated: 2019/12/14 12:06:17 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROJECTILE_HPP
-# define PROJECTILE_HPP
+#ifndef LIST_HPP
+# define LIST_HPP
 
+# include "Elem.hpp"
 # include "GameObject.hpp"
-# include "GameEntity.hpp"
-# include "List.hpp"
 
-class Projectile : public GameObject
+class List
 {
-	private:
-		int				_damage;
-		GameEntity		*_source;
 	public:
-		static List		lst;
-		Projectile(void);
-		Projectile(Projectile const &src);
-		Projectile(GameEntity *src);
-		void			setDamage(int amount);
-		Projectile		&operator=(Projectile const &rh);
-		~Projectile();
-		void			process(float const t);
+		int			_size;
+		Elem		*_first;
+		Elem		*_last;
+		List(void);
+		List(List const &src);
+		List		&operator=(List const &rh);
+		~List(void);
+		// void		push(GameEntity *e);
+		GameObject	*pop(GameObject *elem);
+		List		&operator<<(GameObject *e);
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 12:40:59 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 14:54:37 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 10:13:02 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@
 # include "GameObject.hpp"
 
 
-class GameEntity : GameObject
+class GameEntity : public GameObject
 {
 	protected:
 		int				_hp;
 		int				_hp_max;
 		int				_ep;
 		int				_ep_max;
+		char			_actual_sprite;
 		// static long		_last;
 	public:
 		GameEntity(void);

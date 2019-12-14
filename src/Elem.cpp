@@ -1,47 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Enemy.cpp                                          :+:      :+:    :+:   */
+/*   Elem.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/14 11:58:17 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 12:11:10 by mbuch            ###   ########.fr       */
+/*   Created: 2019/12/14 10:42:38 by mbuch             #+#    #+#             */
+/*   Updated: 2019/12/14 11:49:31 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Enemy.hpp"
+#include  "Elem.hpp"
 
-Enemy::Enemy(void) : _level(1)
+Elem::Elem(void) : _data(0), _next(0), _prev(0)
 {
-	this->lst << this;
 	return ;
 }
 
-Enemy::Enemy(Enemy const & src) : _level(src._level)
+Elem::Elem(Elem const & src) : _data(src._data), _next(src._next), _prev(src._prev)
 {
-	this->lst << this;
 	return ;
 }
 
-Enemy			&Enemy::operator=(Enemy &rh)
+Elem::Elem(GameObject *data) : _data(data), _next(0), _prev(0)
 {
-	this->_pos = rh.getPos();
+	return ;
+}
+
+Elem			&Elem::operator=(Elem const &rh)
+{
+	this->_data = rh._data;
+	this->_next = rh._next;
+	this->_prev = rh._prev;
 	return (*this);
 }
 
-Enemy::~Enemy(void)
+Elem::~Elem(void)
 {
-	this->lst.pop(this);
 	return ;
 }
 
-void			Enemy::attack(void)
-{
-	Projectile		p;
-
-	p = Projectile(this);
-	p._speed = 2;
-	p.setDamage(10 * this->_level);
-	return ;
-}
