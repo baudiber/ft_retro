@@ -6,7 +6,7 @@
 #    By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 12:37:39 by mbuch             #+#    #+#              #
-#    Updated: 2019/12/14 12:49:04 by mbuch            ###   ########.fr        #
+#    Updated: 2019/12/14 14:59:22 by mbuch            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ DEBUG		= -g -O0
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	@(CC) -o $@ $(OBJECTS) -lncurses
+	$(CC) -o $@ $(OBJECTS) -Isrc
 
 $(PATH_OBJ)/%.o: $(addprefix $(PATH_SRC)/,%.cpp)
 	@mkdir -p $(PATH_OBJ)

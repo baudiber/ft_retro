@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/14 14:52:57 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 14:54:02 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,13 +196,13 @@ void			Engine::render(void) const {
 	refresh();	
 }
 
-void			Engine::displayMenu(void) const {
-	clear();
-	mvprintw(y / 2, x / 2, "FT_RETRO");
-	refresh();
-	int c;
-	for (;;)
-		if ((c = getch()) == KEY_SPACE)
-			break;
-}
+// void			Engine::displayMenu(void) const {
+// 	clear();
+// 	mvprintw(y / 2, x / 2, "FT_RETRO");
+// 	refresh();
+// 	int c;
+// 	for (;;)
+// 		if ((c = getch()) == KEY_SPACE)
+// 			break;
+// }
 
