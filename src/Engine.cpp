@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 20:40:37 by baudiber         ###   ########.fr       */
+/*   Updated: 2019/12/15 22:11:09 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			Engine::run(void) {
 		if (_player._state == STATE_DEAD)
 			break;
 		_player.input(k);
-		_player.process(0.1);
+		_player.process(1);
 		usleep(SLEEP);
 		this->process();
 		this->render();

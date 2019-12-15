@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 12:39:31 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 20:38:40 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 22:08:52 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void			Player::takeDamage(int value)
 }
 
 void		Player::process(float const t) {
-	this->_pos._x = this->_pos._x + this->_mov._x * 4;
-	this->_pos._y = this->_pos._y - this->_mov._y;
+	this->_pos._x = this->_pos._x + this->_mov._x / 2;
+	this->_pos._y = this->_pos._y - this->_mov._y / 2;
 	this->_mov = this->_mov* t;
 }
 
