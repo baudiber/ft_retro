@@ -6,17 +6,13 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 12:39:44 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 20:20:08 by roddavid         ###   ########.fr       */
+/*   Updated: 2019/12/15 20:34:37 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_HPP
 # define PLAYER_HPP
-# define KEY_ARROW_UP 259
-# define KEY_ARROW_DOWN 258
-# define KEY_ARROW_RIGHT 261
-# define KEY_ARROW_LEFT 260
-# define KEY_SPACE 32
+# include "bindings.hpp"
 # include "GameEntity.hpp"
 # include "Projectile.hpp"
 # include <string>
@@ -28,6 +24,7 @@ class Player : public GameEntity
 		int				_lives;
 		int				_level;
 		int				_score;
+		Vect2			_spawn;
 	public:
 		int				getScore() const;
 		void			score(int value);
@@ -43,6 +40,9 @@ class Player : public GameEntity
 		Player(Player const &src);
 		Player			&operator=(Player &rh);
 		~Player();
+
+		void			setSpawn(Vect2 const &);
+		void			resetPos(void);
 };
 
 #endif

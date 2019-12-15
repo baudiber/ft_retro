@@ -73,7 +73,10 @@ void			Player::takeDamage(int value)
 	{
 		this->_lives--;
 		if (_lives >= 0)
+		{
+			this->resetPos();
 			this->_hp = _hp_max;
+		}
 		else
 			this->_state = STATE_DEAD;
 	}
@@ -96,6 +99,15 @@ void		Player::input(int key) {
 		this->_mov._x = -1;
 	if (key == KEY_SPACE)
 		this->fire();
+}
+
+void			Player::setSpawn(Vect2 const &v) {
+	this->_pos = v;
+	this->_spawn = v;
+}
+
+void			Player::resetPos(void) {
+	this->_pos = this->_spawn;
 }
 
 std::string		Player::getName() const

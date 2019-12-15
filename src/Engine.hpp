@@ -54,7 +54,6 @@ class Engine
 		int					get();
   
 		void				run(void);
-		void				error(std::string const & msg);
 		void				gameOver(void);
 		void				displayObject(GameObject *) const;
 
