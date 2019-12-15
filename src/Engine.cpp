@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 08:20:48 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 08:34:59 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void			Engine::processEnemies(void)
 	i = Enemy::lst._first;
 	while (i)
 	{
-		i->_data->process(0.1);
+		i->_data->process(0.001);
 		e = reinterpret_cast<Enemy*>(i->_data);
 		if (i->_data->collide(&this->_player))
 		{
@@ -190,7 +190,7 @@ void			Engine::process(void)
 	}
 	if (this->_player.getScore() % (10000 * this->_player.getLevel()))
 		this->_player.levelUp();
-	// this->_player.process(0.2);
+	this->_player.process(0.002);
 	this->processEnemies();
 	this->processProjectiles();
 }
@@ -241,8 +241,9 @@ void			Engine::displayHud(void) const {
 	//display score
 	mvprintw(this->_win_h - 1 , 0, "score: %d", this->_score);
 	mvprintw(this->_win_h - 1 , 40, "enemies: %d", Enemy::lst._size);
-	mvprintw(this->_win_h - 1 , 70, "count: %d", _count);
-	mvprintw(this->_win_h - 1 , 100, "count: %d", _level);
+	mvprintw(this->_win_h - 1 , 70, "lives: %d", this->_player.getLives());
+	mvprintw(this->_win_h - 1 , 100, "level: %d", _level);
+	mvprintw(this->_win_h - 1 , 100, "level: %d", _level);
 	mvprintw(this->_win_h - 1 , this->_win_w - 12, "esc to quit");
 	return;
 }

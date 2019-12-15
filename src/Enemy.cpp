@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:58:17 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 06:49:07 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 08:33:09 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 Enemy::Enemy(void) : _level(1)
 {
+	this->_mov = Vect2(0, 0);
+	this->_dir = Vect2(-1, 0);
 	this->lst.push(this);
 	this->_sprite = "oO";
 	return ;
