@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 18:33:10 by baudiber         ###   ########.fr       */
+/*   Updated: 2019/12/15 18:35:19 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,11 @@ void			Engine::process(void)
 		this->_level++;
 	}
 	this->_player.process(0.002);
+	_player._pos._x = (_player._pos._x < 0 ? 0 : _player._pos._x);
+	_player._pos._y = (_player._pos._y < 0 ? 0 : _player._pos._y);
+	_player._pos._x = (_player._pos._x >= _win_w ? _win_w : _player._pos._x);
+	_player._pos._y = (_player._pos._y >= _win_h - 2 ? _win_h - 2: _player._pos._y);
+
 	this->processEnemies();
 	this->processProjectiles();
 }
