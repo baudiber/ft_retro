@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 12:38:48 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 15:43:57 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 04:20:49 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@
 
 int				main()
 {
-	GameEntity	enemy0;
-	GameEntity	*eptr = new GameEntity(enemy0);
-	GameEntity	*cpy_ptr;
+	Engine		game;
 
-	cpy_ptr = eptr;
+	game.run();
 	return (0);
 }
