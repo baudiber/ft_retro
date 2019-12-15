@@ -87,6 +87,15 @@ void			Engine::spawn(void)
 	e->_level = rand() % this->_level + 1;
 }
 
+void			Engine::spawnStars(void)
+{
+	Star		*s = new Star();
+
+	s->_pos = Vect2(this->_win_w - 1, rand() % (this->_win_h - 2));
+	s->_dir = Vect2(-1, 0);
+	s->_mov = Vect2(2, 0);
+}
+
 void			Engine::processProjectile(Projectile *p)
 {
 	Elem		*i;
@@ -121,6 +130,28 @@ void			Engine::processProjectiles(void)
 		i->_data->process(0.1);
 		p = reinterpret_cast<Projectile*>(i->_data);
 		processProjectile(p);
+		i = i->_next;
+	}
+}
+
+void			Engine::processStars(void)
+{
+	Elem		*i;
+	Elem		*j;
+	Star		*e;
+
+	i = Star::lst._first;
+	while (i)
+	{
+		i->_data->process(0.1);
+		e = reinterpret_cast<Star*>(i->_data);
+		if (e->_pos._x < 0)
+		{
+			j = i;
+			i = i->_next;
+			Star::lst.pop(j);
+			continue ;
+		}
 		i = i->_next;
 	}
 }
@@ -163,8 +194,10 @@ void			Engine::processEnemies(void)
 void			Engine::process(void)
 {
 	_count++;
+	if ((this->_count % 100) == 0)
+		this->spawnStars();
 	if ((this->_count % 1000) == 0)
-		spawn();
+		this->spawn();
 	if (this->_count % (50000 * this->_level) == 0)
 	{
 		this->_count = 0;
@@ -178,6 +211,7 @@ void			Engine::process(void)
 
 	this->processEnemies();
 	this->processProjectiles();
+	this->processStars();
 }
 
 void			Engine::render(void) const {
@@ -196,6 +230,10 @@ void			Engine::render(void) const {
 	attroff(A_BOLD); //but projectiles in normal font
 	for (Elem* i = Projectile::lst._first; i != 0; i = i->_next)
 		displayObject(i->_data);
+
+	for (Elem* i = Star::lst._first; i != 0; i = i->_next)
+		displayObject(i->_data);
+	
 	
 	refresh();	
 }
@@ -222,8 +260,8 @@ void			Engine::displayHud(void) const {
 	//display score
 	mvprintw(this->_win_h - 1 , 0, "score: %d", this->_player.getScore());
 	mvprintw(this->_win_h - 1 , 30, "enemies: %d", Enemy::lst._size);
-	mvprintw(this->_win_h - 1 , 60, "frames: %d", _count);
-	mvprintw(this->_win_h - 1 , 90, "level: %d", _level);
+	mvprintw(this->_win_h - 1 , 60, "frames: %d", this->_count);
+	mvprintw(this->_win_h - 1 , 90, "level: %d", this->_level);
 	mvprintw(this->_win_h - 1 , 120, "lives: %d", this->_player.getLives());
 	mvprintw(this->_win_h - 1 , this->_win_w - 12, "esc to quit");
 	return;

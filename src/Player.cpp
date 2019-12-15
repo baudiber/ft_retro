@@ -63,6 +63,14 @@ void			Player::fire() {
 	Projectile   *p= new Projectile(this);
   	p->_pos = this->_pos;
   	p->_dir = Vect2(2, 0);
+	Projectile   *p1= new Projectile(this);
+  	p1->_pos = this->_pos;
+  	p1->_pos._y++;
+  	p1->_dir = Vect2(2, 0);
+	Projectile   *p2= new Projectile(this);
+  	p2->_pos = this->_pos;
+  	p2->_pos._y--;
+  	p2->_dir = Vect2(2, 0);
 }
 
 void			Player::takeDamage(int value)

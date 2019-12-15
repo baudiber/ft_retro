@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include "GameEntity.hpp"
 # include "Enemy.hpp"
+# include "Star.hpp"
 # include "Projectile.hpp"
 # include "Player.hpp"
 # include "Vect2.hpp"
@@ -35,9 +36,11 @@ class Engine
 		static int			_level;
 		WINDOW*				_win;
 		void				spawn(void);
+		void				spawnStars(void);
 		void				processCollision(GameEntity);
 		void				processEnemies(void);
 		void				processProjectiles(void);
+		void				processStars(void);
 		void				processProjectile(Projectile *p);
 
 	public:
