@@ -6,20 +6,20 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:50:27 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 04:23:34 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 07:56:22 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENGINE_HPP
 # define ENGINE_HPP
 
+# include <unistd.h>
 # include "GameEntity.hpp"
 # include "Enemy.hpp"
 # include "Projectile.hpp"
 # include "Player.hpp"
 # include "Vect2.hpp"
 # include "bindings.hpp"
-# include "ncurses.h"
 
 # define MAX_ENEMY		256
 # define MAX_PROJECT	256

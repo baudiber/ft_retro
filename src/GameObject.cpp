@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:42:38 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 13:21:51 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 07:38:23 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,17 @@ GameObject			*GameObject::collide(GameObject *o)
 
 void				GameObject::process(float const t)
 {
-	this->_step += this->_speed * t;
-	if (this->_step >= 2.0)
-	{
-		if (this->_state != STATE_DEAD)
-		{
-			this->_state = STATE_IDLE;
-			this->_step = 0;
-		}
-	}
-	this->_pos = (Vect2(1, 0) + this->_mov) * this->_speed * t;
-	this->_mov = this->_mov * 0.8;
+	// this->_step += this->_speed * t;
+	// if (this->_step >= 2.0)
+	// {
+	// 	if (this->_state != STATE_DEAD)
+	// 	{
+	// 		this->_state = STATE_IDLE;
+	// 		this->_step = 0;
+	// 	}
+	// }
+	// this->_pos = (Vect2(1, 0) + this->_mov) * this->_speed * t;
+	this->_pos._x = this->_pos._x - 0.001;
+	this->_mov = this->_mov * t;
 }
 
