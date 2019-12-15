@@ -6,19 +6,20 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 08:14:27 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 17:22:06 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Engine.hpp"
 
-Engine::Engine(void) : _score(0) {
+Engine::Engine(void) {
 	std::cout << "Engine Default constructor called" << std::endl;
 	this->_win = initscr();
 	this->_level = 1;
 	this->_count = 0;
 	keypad(this->_win, true);
 	noecho();
+	cbreak();
 	curs_set(0);
 	getmaxyx(this->_win, this->_win_h, this->_win_w);
     if (this->_win_h <= 20 || this->_win_w <= 100) 
@@ -40,7 +41,7 @@ Engine::Engine(Engine const & src) {
 }
 
 Engine::~Engine(void) {
-	std::cout << "Engine Destructor called" << std::endl;
+	//std::cout << "Engine Destructor called" << std::endl;
 	nodelay(stdscr, false);
 	getch();
 	endwin();
@@ -74,6 +75,7 @@ void			Engine::run(void) {
 			break;
 		if (_player._state == STATE_DEAD)
 			break;
+		usleep(2000);
 		std::cout << k << std::endl;
 		// process input
 		this->process();
@@ -238,7 +240,7 @@ void			Engine::displayObject(GameObject *obj) const {
 
 void			Engine::displayHud(void) const {
 	//display score
-	mvprintw(this->_win_h - 1 , 0, "score: %d", this->_score);
+	mvprintw(this->_win_h - 1 , 0, "score: %d", this->_player.getScore());
 	mvprintw(this->_win_h - 1 , 40, "enemies: %d", Enemy::lst._size);
 	mvprintw(this->_win_h - 1 , 70, "count: %d", _count);
 	mvprintw(this->_win_h - 1 , 100, "level: %d", _level);
@@ -257,7 +259,6 @@ void			Engine::gameOver(void) {
 	clear();
 	mvprintw(this->_win_h * 0.5, this->_win_w * 0.5 - 4, "Game Over");
 	refresh();
-
 }
 
 int					Engine::_level = 1;
