@@ -6,43 +6,48 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:58:17 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 13:45:59 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 15:42:10 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Enemy.hpp"
 
-Enemy::Enemy(void) : _level(1), _weapon(Weapon())
+Enemy::Enemy(void) : _level(1)
 {
+	std::cout << "Creating Default Enemy" << std::endl;
+	this->lst.push(this);
+	this->_sprite = "oO";
 	return ;
 }
 
-Enemy::Enemy(Enemy const & src) : _level(src._level), _weapon(src._weapon)
+Enemy::Enemy(Enemy const & src) : _level(src._level)
 {
+	std::cout << "Creating Enemy by copy" << std::endl;
+	this->_pos = src._pos;
+	this->_dir = src._dir;
+	this->_sprite = src._sprite;
+	this->lst.push(this);
 	return ;
 }
 
-Enemy::Enemy(int level, int weapon) : _level(1), _weapon(1)
+Enemy			&Enemy::operator=(Enemy &rh)
 {
-	return ;
+	this->_pos = rh.getPos();
+	return (*this);
 }
 
 Enemy::~Enemy(void)
 {
+	this->lst.pop(this);
 	return ;
 }
 
 void			Enemy::attack(void)
 {
-	if (this->weapon)
+	Projectile	*p;
 
+	p = new Projectile(this);
+	p->_speed = 2;
+	p->setDamage(10 * this->_level);
 	return ;
 }
-
-Enemy			&Enemy::operator=(Enemy const &rh)
-{
-	this->_level = rh._level;
-	this->_weapon = rh._weapon;
-	return (*this);
-}
-

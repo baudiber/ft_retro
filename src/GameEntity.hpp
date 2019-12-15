@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 12:40:59 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 14:54:37 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 15:39:50 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "GameObject.hpp"
 
 
-class GameEntity : GameObject
+class GameEntity : public GameObject
 {
 	protected:
 		int				_hp;
@@ -33,6 +33,7 @@ class GameEntity : GameObject
 		GameEntity(GameEntity const &src);
 		GameEntity		operator=(GameEntity const &rh);
 		~GameEntity();
+		char			actualSprite();
 		void			takeDamage(int amount);
 };
 

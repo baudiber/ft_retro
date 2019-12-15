@@ -16,7 +16,7 @@
 # include "GameEntity.hpp"
 # include "Enemy.hpp"
 # include "Projectile.hpp"
-# include "Weapon.hpp"
+# include "Player.hpp"
 # include "Vect2.hpp"
 
 # define MAX_ENEMY		256
@@ -25,30 +25,41 @@
 class Engine
 {
 	private:
-		int				_win_w;
-		int				_win_h;
-		int				_enemy_nb;
-		int				_projectile_nb;
-		int				_score;
-		WINDOW*			_win;
+
+		int					_count;
+		int					_win_w;
+		int					_win_h;
+		static int			_level;
+		static int			_enemy_nb;
+		static int			_projectile_nb;
+		WINDOW*				_win;
+		void				spawn(void);
+		void				processCollision(GameEntity);
+		void				processEnemies(void);
+		void				processProjectiles(void);
+		void				processProjectile(Projectile *p);
 
 	public:
 		Engine(void);
 		Engine(Engine const &src);
-		Engine			&operator=(Engine const &rh);
+		Engine				&operator=(Engine const &rh);
 		~Engine();
-		Vect2			win;
-		Enemy			_enemies[MAX_ENEMY];
-		Projectile		_projectiles[MAX_PROJECT];
-		GameEntity		_player;
-		void			addProjectile(Weapon *w);
-		int				get();
-		
-		void			render(void) const;
-		void			displayMenu(void) const;
+		int					load(void);
+		Vect2				win;
+		static Enemy		_enemies[MAX_ENEMY];
+		static Projectile	_projectiles[MAX_PROJECT];
+		static Player		_player;
+		static std::string	level;
+		int					get();
+  
 		void			run(void);
 		void			error(std::string const & msg);
 		void			gameOver(void);
+
+		void				process(void);
+		void				render(void) const;
+		void				displayMenu(void) const;
+
 };
 
 #endif
