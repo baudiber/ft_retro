@@ -59,11 +59,6 @@ Engine &		Engine::operator=(Engine const & rhs) {
 	return *this;
 }
 
-
-//void			Engine::addProjectile(Weapon *w) {
-//
-//}
-
 void			Engine::run(void) {
 	int k = 0;
 
@@ -86,12 +81,11 @@ void			Engine::run(void) {
 
 void			Engine::spawn(void)
 {
-	Enemy		e;
+	Enemy		*e = new Enemy();
 
-	//               0 est a gauche pour w      et 0 est top  pour h
-	e._pos = Vect2(this->_win_w, rand() % (this->_win_h - 100));
-	e._dir = Vect2(-1, 0);
-	e._level = rand() % this->_level + 1;
+	e->_pos = Vect2(this->_win_w - 1, rand() % (this->_win_h));
+	e->_dir = Vect2(-1, 0);
+	e->_level = rand() % this->_level + 1;
 }
 
 void			Engine::processProjectile(Projectile *p)
