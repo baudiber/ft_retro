@@ -6,17 +6,13 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 12:39:44 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 18:01:19 by roddavid         ###   ########.fr       */
+/*   Updated: 2019/12/15 20:34:37 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_HPP
 # define PLAYER_HPP
-# define KEY_ARROW_UP 259
-# define KEY_ARROW_DOWN 258
-# define KEY_ARROW_RIGHT 261
-# define KEY_ARROW_LEFT 260
-# define KEY_SPACE 32
+# include "bindings.hpp"
 # include "GameEntity.hpp"
 # include "Projectile.hpp"
 # include <string>
