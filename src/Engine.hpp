@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:50:27 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 20:17:29 by baudiber         ###   ########.fr       */
+/*   Updated: 2019/12/15 04:23:34 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ class Engine
 		int					_win_w;
 		int					_win_h;
 		static int			_level;
-		static int			_enemy_nb;
-		static int			_projectile_nb;
 		WINDOW*				_win;
 		void				spawn(void);
 		void				processCollision(GameEntity);

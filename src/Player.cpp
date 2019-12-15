@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 12:39:31 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 15:41:38 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 04:33:41 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 Player::Player(void) : _name("PLAYER ONE"), _lives(5), _level(1), _score(0)
 {
+	this->_dir = Vect2(1, 0);
+	this->_pos = Vect2(2, 2);
 	return ;
 }
 
@@ -54,6 +56,20 @@ int				Player::getLevel() const
 void			Player::score(int value)
 {
 	this->_score += value;
+}
+
+void			Player::takeDamage(int value)
+{
+	this->_hp -= value;
+	this->_hp = (this->_hp < 0 ? 0 : this->_hp);
+	if (this->_hp <= 0)
+	{
+		this->_lives--;
+		if (_lives >= 0)
+			this->_hp = _hp_max;
+		else
+			this->_state = STATE_DEAD;
+	}
 }
 
 std::string		Player::getName() const

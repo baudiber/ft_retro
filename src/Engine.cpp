@@ -6,14 +6,14 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/14 20:17:28 by baudiber         ###   ########.fr       */
+/*   Updated: 2019/12/15 04:31:50 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Engine.hpp"
 
 
-Engine::Engine(void) : _enemy_nb(0), _projectile_nb(0) , _score(0) {
+Engine::Engine(void) {
 	std::cout << "Engine Default constructor called" << std::endl;
 	this->_win = initscr();
 	this->_level = 1;
@@ -52,8 +52,6 @@ Engine &		Engine::operator=(Engine const & rhs) {
 		this->_level = rhs._level;
 		this->_win_w = rhs._win_w;
 		this->_win_h = rhs._win_h;
-		this->_enemy_nb = rhs._enemy_nb;
-		this->_projectile_nb = rhs._projectile_nb;
 	}
 	return *this;
 }
@@ -72,8 +70,11 @@ void			Engine::run(void) {
 		//to break
 		if ((k = getch()) == KEY_ESC)
 			this->gameOver();
-
-
+		if (_player._state == STATE_DEAD)
+			this->gameOver();
+		std::cout << k << std::endl;
+		// process input
+		this->process();
 		this->render();
 	}
 }
