@@ -6,7 +6,7 @@
 #    By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 12:37:39 by mbuch             #+#    #+#              #
-#    Updated: 2019/12/15 20:41:46 by mbuch            ###   ########.fr        #
+#    Updated: 2019/12/15 21:34:31 by baudiber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS			:= main.cpp \
 			Projectile.cpp \
 			Player.cpp \
 			Enemy.cpp \
+			Star.cpp \
 			Engine.cpp
 
 PATH_OBJ	:= ./obj

@@ -63,6 +63,14 @@ void			Player::fire() {
 	Projectile   *p= new Projectile(this);
   	p->_pos = this->_pos;
   	p->_dir = Vect2(2, 0);
+	Projectile   *p1= new Projectile(this);
+  	p1->_pos = this->_pos;
+  	p1->_pos._y++;
+  	p1->_dir = Vect2(2, 0);
+	Projectile   *p2= new Projectile(this);
+  	p2->_pos = this->_pos;
+  	p2->_pos._y--;
+  	p2->_dir = Vect2(2, 0);
 }
 
 void			Player::takeDamage(int value)
@@ -73,15 +81,18 @@ void			Player::takeDamage(int value)
 	{
 		this->_lives--;
 		if (_lives >= 0)
+		{
+			this->resetPos();
 			this->_hp = _hp_max;
+		}
 		else
 			this->_state = STATE_DEAD;
 	}
 }
 
 void		Player::process(float const t) {
-	this->_pos._x = this->_pos._x + this->_mov._x / 2;
-	this->_pos._y = this->_pos._y - this->_mov._y / 2;
+	this->_pos._x = this->_pos._x + this->_mov._x * 4;
+	this->_pos._y = this->_pos._y - this->_mov._y;
 	this->_mov = this->_mov* t;
 }
 
@@ -96,6 +107,15 @@ void		Player::input(int key) {
 		this->_mov._x = -1;
 	if (key == KEY_SPACE)
 		this->fire();
+}
+
+void			Player::setSpawn(Vect2 const &v) {
+	this->_pos = v;
+	this->_spawn = v;
+}
+
+void			Player::resetPos(void) {
+	this->_pos = this->_spawn;
 }
 
 std::string		Player::getName() const

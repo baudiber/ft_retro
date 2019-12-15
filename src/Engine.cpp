@@ -13,7 +13,7 @@
 #include "Engine.hpp"
 
 Engine::Engine(void) {
-	std::cout << "Engine Default constructor called" << std::endl;
+	//std::cout << "Engine Default constructor called" << std::endl;
 	this->_win = initscr();
 	this->_level = 1;
 	this->_count = 0;
@@ -22,9 +22,7 @@ Engine::Engine(void) {
 	cbreak();
 	curs_set(0);
 	getmaxyx(this->_win, this->_win_h, this->_win_w);
-    if (this->_win_h <= 20 || this->_win_w <= 100) 
-		this->error("Please enlarge your window");
-	this->_player._pos = Vect2(5.0f, this->_win_h / 2.0);
+	this->_player.setSpawn(Vect2(5.0f, this->_win_h / 2.0));
 	this->_player._sprite = "[";
 	this->displayMenu();
 	nodelay(stdscr, true);
@@ -43,8 +41,9 @@ Engine::Engine(Engine const & src) {
 Engine::~Engine(void) {
 	//std::cout << "Engine Destructor called" << std::endl;
 	nodelay(stdscr, false);
-	getch();
 	endwin();
+    if (this->_win_h <= 20 || this->_win_w <= 150) 
+		std::cout << "Please enlarge your window" << std::endl;
 	return;
 }	
 
@@ -61,6 +60,8 @@ Engine &		Engine::operator=(Engine const & rhs) {
 
 void			Engine::run(void) {
 	int k = 0;
+    if (this->_win_h <= 20 || this->_win_w <= 150) 
+		return;
 
 	for (;;)
 	{
@@ -81,10 +82,19 @@ void			Engine::spawn(void)
 {
 	Enemy		*e = new Enemy();
 
-	e->_pos = Vect2(this->_win_w - 1, rand() % (this->_win_h));
+	e->_pos = Vect2(this->_win_w - 1, rand() % (this->_win_h - 2));
 	e->_dir = Vect2(-1, 0);
 	e->_level = rand() % this->_level + 1;
 	e->_speed *= e->_level;
+}
+
+void			Engine::spawnStars(void)
+{
+	Star		*s = new Star();
+
+	s->_pos = Vect2(this->_win_w - 1, rand() % (this->_win_h - 2));
+	s->_dir = Vect2(-1, 0);
+	s->_mov = Vect2(2, 0);
 }
 
 void			Engine::processProjectile(Projectile *p)
@@ -125,6 +135,28 @@ void			Engine::processProjectiles(void)
 	}
 }
 
+void			Engine::processStars(void)
+{
+	Elem		*i;
+	Elem		*j;
+	Star		*e;
+
+	i = Star::lst._first;
+	while (i)
+	{
+		i->_data->process(0.1);
+		e = reinterpret_cast<Star*>(i->_data);
+		if (e->_pos._x < 0)
+		{
+			j = i;
+			i = i->_next;
+			Star::lst.pop(j);
+			continue ;
+		}
+		i = i->_next;
+	}
+}
+
 void			Engine::processEnemies(void)
 {
 	Elem		*i;
@@ -136,6 +168,16 @@ void			Engine::processEnemies(void)
 	{
 		i->_data->process(0.001);
 		e = reinterpret_cast<Enemy*>(i->_data);
+		if (e->_level == 1)
+			e->_sprite = "O";
+		if (e->_level == 2)
+			e->_sprite = "oO";
+		if (e->_level == 3)
+			e->_sprite = "oOo";
+		if (e->_level == 4)
+			e->_sprite = "oOoO";
+		if (e->_level == 5)
+			e->_sprite = "oOoOo";
 		if (i->_data->collide(&this->_player))
 		{
 			this->_player.takeDamage(20);
@@ -163,8 +205,10 @@ void			Engine::processEnemies(void)
 void			Engine::process(void)
 {
 	_count++;
-	if ((this->_count % (5000 / _level)) == 0)
-		spawn();
+	if ((this->_count % 100) == 0)
+		this->spawnStars();
+  if ((this->_count % (5000 / _level)) == 0)
+		this->spawn();
 	if (this->_count % (50000 * this->_level) == 0)
 	{
 		this->_count = 0;
@@ -179,6 +223,7 @@ void			Engine::process(void)
 
 	this->processEnemies();
 	this->processProjectiles();
+	this->processStars();
 }
 
 void			Engine::render(void) const {
@@ -194,9 +239,13 @@ void			Engine::render(void) const {
 	for (Elem* i = Enemy::lst._first; i != 0; i = i->_next)
 		displayObject(i->_data);
 
-	attroff(A_BOLD);
+	attroff(A_BOLD); //but projectiles in normal font
 	for (Elem* i = Projectile::lst._first; i != 0; i = i->_next)
 		displayObject(i->_data);
+
+	for (Elem* i = Star::lst._first; i != 0; i = i->_next)
+		displayObject(i->_data);
+	
 	
 	refresh();	
 }
@@ -214,29 +263,19 @@ void			Engine::displayMenu(void) const {
 }
 
 void			Engine::displayObject(GameObject *obj) const {
-	// x - half of string size ?
-	// is actual pos on the left of the sprite or middle when using multiple chars?
 	if (obj->_state != STATE_DEAD)
-	{
 		mvprintw(obj->_pos._y, obj->_pos._x, obj->_sprite.c_str());
-	}
 	return;
 }
 
 void			Engine::displayHud(void) const {
 	//display score
 	mvprintw(this->_win_h - 1 , 0, "score: %d", this->_player.getScore());
-	mvprintw(this->_win_h - 1 , 40, "enemies: %d", Enemy::lst._size);
-	mvprintw(this->_win_h - 1 , 70, "count: %d", _count);
-	mvprintw(this->_win_h - 1 , 100, "level: %d", _level);
+	mvprintw(this->_win_h - 1 , 30, "enemies: %d", Enemy::lst._size);
+	mvprintw(this->_win_h - 1 , 60, "frames: %d", this->_count);
+	mvprintw(this->_win_h - 1 , 90, "level: %d", this->_level);
+	mvprintw(this->_win_h - 1 , 120, "lives: %d", this->_player.getLives());
 	mvprintw(this->_win_h - 1 , this->_win_w - 12, "esc to quit");
-	return;
-}
-
-
-void			Engine::error(std::string const & msg) {
-	std::cout << msg << std::endl;
-	exit(0);
 	return;
 }
 
