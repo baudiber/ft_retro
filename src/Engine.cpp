@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 18:19:05 by roddavid         ###   ########.fr       */
+/*   Updated: 2019/12/15 18:33:10 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void			Engine::run(void) {
 
 	for (;;)
 	{
-		//check for game over
-		//to break
 		if ((k = getch()) == KEY_ESC)
 			break;
 		if (_player._state == STATE_DEAD)
@@ -246,14 +244,20 @@ void			Engine::displayHud(void) const {
 
 void			Engine::error(std::string const & msg) {
 	std::cout << msg << std::endl;
-	//EXIT
+	exit(0);
 	return;
 }
 
 void			Engine::gameOver(void) {
 	clear();
 	mvprintw(this->_win_h * 0.5, this->_win_w * 0.5 - 4, "Game Over");
+	mvprintw(this->_win_h * 0.5 + 1, this->_win_w * 0.5 - 4, "Score: %d", this->_player.getScore());
+	mvprintw(this->_win_h * 0.6 + 1, this->_win_w * 0.5 - 5, "press   esc");
 	refresh();
+	int c;
+	for (;;)
+		if ((c = getch()) == KEY_ESC)
+			break;
 }
 
 int					Engine::_level = 1;
