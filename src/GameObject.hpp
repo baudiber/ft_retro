@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 14:43:14 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 14:04:35 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 15:40:54 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <string>
 # include <ncurses.h>
 # include "Vect2.hpp"
+# include "List.hpp"
 
 # define STATE_IDLE		0
 # define STATE_WAIT		1
@@ -38,6 +39,10 @@ class GameObject
 		GameObject(GameObject const &src);
 		GameObject		operator=(GameObject const &rh);
 		~GameObject();
+		Vect2			getPos();
+		Vect2			getDir();
+		GameObject		*collide(GameObject *o);
+		GameObject		*collide(List *lst);
 		void			move(Vect2 const &v);
 		virtual void	process(float const t);
 };

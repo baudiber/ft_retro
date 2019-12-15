@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 13:59:23 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 14:54:18 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 15:41:44 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,36 @@
 
 Projectile::Projectile(void) : _source(NULL)
 {
+	this->lst << this;
+	this->_sprite = "-=-";
 	return ;
 }
 
-Projectile::Projectile(Projectile const & src) : _source(src._source)
+Projectile::Projectile(Projectile const & src) : \
+_source(src._source)
 {
+	this->lst << this;
+	this->_sprite = "-=-";
 	return ;
 }
 
-Projectile::Projectile(Weapon &w) : _source(&w)
+Projectile::Projectile(GameEntity *src) : _source(src), _damage(20)
 {
+	this->lst << this;
+	this->_sprite = "-=-";
+	this->_pos = src->getPos();
+	this->_dir = src->getDir();
 	return ;
+}
+
+void				Projectile::setDamage(int amount)
+{
+	this->_damage = amount;
 }
 
 Projectile::~Projectile(void)
 {
-	return ;
-}
-
-void			Projectile::process(float const t)
-{
-	GameObject	*obj;
-
-	obj = this;
-	obj->process(t);
-	if ()
-
+	this->lst << this;
 	return ;
 }
 
@@ -48,4 +52,3 @@ Projectile			&Projectile::operator=(Projectile const &rh)
 	this->_source = rh._source;
 	return (*this);
 }
-

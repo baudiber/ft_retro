@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Projectile.hpp                                     :+:      :+:    :+:   */
+/*   Player.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/14 13:59:42 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 15:40:34 by mbuch            ###   ########.fr       */
+/*   Created: 2019/12/14 12:39:44 by mbuch             #+#    #+#             */
+/*   Updated: 2019/12/14 15:40:29 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROJECTILE_HPP
-# define PROJECTILE_HPP
+#ifndef PLAYER_HPP
+# define PLAYER_HPP
 
-# include "GameObject.hpp"
 # include "GameEntity.hpp"
-# include "List.hpp"
+# include <string>
 
-class Projectile : public GameObject
+class Player : public GameEntity
 {
 	private:
+		std::string		_name;
+		int				_lives;
+		int				_level;
+		int				_score;
 	public:
-		GameEntity		*_source;
-		int				_damage;
-		static List		lst;
-		Projectile(void);
-		Projectile(Projectile const &src);
-		Projectile(GameEntity *src);
-		void			setDamage(int amount);
-		Projectile		&operator=(Projectile const &rh);
-		~Projectile();
-		void			process(float const t);
+		int				getScore() const;
+		void			score(int value);
+		std::string		getName() const;
+		int				getLives() const;
+		int				getLevel() const;
+		void			levelUp();
+		Player(void);
+		Player(Player const &src);
+		Player		&operator=(Player &rh);
+		~Player();
 };
 
 #endif

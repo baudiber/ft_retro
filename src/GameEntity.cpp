@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:46:35 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 14:54:29 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 14:46:51 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,18 @@ GameEntity::~GameEntity(void)
 
 GameEntity			GameEntity::operator=(GameEntity const &rh)
 {
-	std::cout << "COpy Operator GAME ENTITY" << std::endl;
+	std::cout << "Copy Operator GAME ENTITY" << std::endl;
 	this->_hp = rh._hp;
 	this->_hp_max = rh._hp_max;
 	this->_ep = rh._ep;
 	this->_ep_max = rh._ep_max;
 	this->_speed = rh._speed;
 	return (*this);
+}
+
+char				GameEntity::actualSprite()
+{
+	return (this->_sprite[(int)(this->_step) % (this->_sprite.length() - 1)]);
 }
 
 void				GameEntity::takeDamage(int amount)
