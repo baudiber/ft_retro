@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   bindings.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
+/*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/13 12:38:48 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 04:20:49 by mbuch            ###   ########.fr       */
+/*   Created: 2019/12/15 13:01:46 by baudiber          #+#    #+#             */
+/*   Updated: 2019/12/15 13:50:36 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
-#include "GameEntity.hpp"
-#include "Engine.hpp"
+#ifndef BINDINGS_HPP
+# define BINDINGS_HPP
 
-int				main()
-{
-	Engine		game;
+# define KEY_NONE -1
+# define KEY_ARROW_UP 3
+# define KEY_ARROW_LEFT 4
+# define KEY_ARROW_RIGHT 5
+# define KEY_ARROW_DOWN 2
+# define KEY_SPACE 32
+# define KEY_ESC 27
 
-	game.run();
-	return (0);
-}
+#endif

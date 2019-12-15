@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 12:39:44 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 15:40:29 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 04:33:22 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ class Player : public GameEntity
 		std::string		getName() const;
 		int				getLives() const;
 		int				getLevel() const;
+		void			takeDamage(int value);
 		void			levelUp();
 		Player(void);
 		Player(Player const &src);
-		Player		&operator=(Player &rh);
+		Player			&operator=(Player &rh);
 		~Player();
 };
 
