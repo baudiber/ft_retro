@@ -91,8 +91,8 @@ void			Player::takeDamage(int value)
 }
 
 void		Player::process(float const t) {
-	this->_pos._x = this->_pos._x + this->_mov._x / 2;
-	this->_pos._y = this->_pos._y - this->_mov._y / 2;
+	this->_pos._x = this->_pos._x + this->_mov._x * 4;
+	this->_pos._y = this->_pos._y - this->_mov._y;
 	this->_mov = this->_mov* t;
 }
 

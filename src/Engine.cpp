@@ -167,6 +167,16 @@ void			Engine::processEnemies(void)
 	{
 		i->_data->process(0.001);
 		e = reinterpret_cast<Enemy*>(i->_data);
+		if (e->_level == 1)
+			e->_sprite = "O";
+		if (e->_level == 2)
+			e->_sprite = "oO";
+		if (e->_level == 3)
+			e->_sprite = "oOo";
+		if (e->_level == 4)
+			e->_sprite = "oOoO";
+		if (e->_level == 5)
+			e->_sprite = "oOoOo";
 		if (i->_data->collide(&this->_player))
 		{
 			this->_player.takeDamage(20);
