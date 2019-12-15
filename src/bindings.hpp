@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/15 13:01:46 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 13:50:36 by baudiber         ###   ########.fr       */
+/*   Updated: 2019/12/15 17:55:18 by roddavid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define BINDINGS_HPP
 
 # define KEY_NONE -1
-# define KEY_ARROW_UP 3
-# define KEY_ARROW_LEFT 4
-# define KEY_ARROW_RIGHT 5
-# define KEY_ARROW_DOWN 2
+# define KEY_ARROW_UP 259
+# define KEY_ARROW_LEFT 260
+# define KEY_ARROW_RIGHT 261
+# define KEY_ARROW_DOWN 258
 # define KEY_SPACE 32
 # define KEY_ESC 27
 

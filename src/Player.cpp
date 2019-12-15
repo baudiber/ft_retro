@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 12:39:31 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 04:33:41 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 18:15:43 by roddavid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,25 @@ void			Player::takeDamage(int value)
 		else
 			this->_state = STATE_DEAD;
 	}
+}
+
+void		Player::process(float const t) {
+	this->_pos._x = this->_pos._x + this->_mov._x / 2;
+	this->_pos._y = this->_pos._y - this->_mov._y / 2;
+	this->_mov = this->_mov* t;
+}
+
+void		Player::input(int key) {
+	if (key == KEY_ARROW_UP)
+		this->_mov._y = 1;
+	else if (key == KEY_ARROW_DOWN)
+		this->_mov._y = -1;
+	if (key == KEY_ARROW_RIGHT)
+		this->_mov._x = 1;
+	else if (key == KEY_ARROW_LEFT)
+		this->_mov._x = -1;
+//	if (key == KEY_SPACE)
+//		Projectile(this);
 }
 
 std::string		Player::getName() const
