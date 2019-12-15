@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 08:04:27 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 08:20:48 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ void			Engine::run(void) {
 
 void			Engine::spawn(void)
 {
-	Enemy		e;
+	Enemy		*e = new Enemy();
 
 	//               0 est a gauche pour w      et 0 est top  pour h
-	e._pos = Vect2(this->_win_w, rand() % (this->_win_h - 100));
-	e._dir = Vect2(-1, 0);
-	e._level = rand() % this->_level + 1;
+	e->_pos = Vect2(this->_win_w - 1, rand() % (this->_win_h));
+	e->_dir = Vect2(-1, 0);
+	e->_level = rand() % this->_level + 1;
 }
 
 void			Engine::processProjectile(Projectile *p)
