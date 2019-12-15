@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 15:59:57 by baudiber         ###   ########.fr       */
+/*   Updated: 2019/12/15 08:14:27 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ Engine::Engine(void) : _score(0) {
 	std::cout << "Engine Default constructor called" << std::endl;
 	this->_win = initscr();
 	this->_level = 1;
+	this->_count = 0;
 	keypad(this->_win, true);
 	noecho();
 	curs_set(0);
 	getmaxyx(this->_win, this->_win_h, this->_win_w);
     if (this->_win_h <= 20 || this->_win_w <= 100) 
 		this->error("Please enlarge your window");
+	this->_player._pos = Vect2(5.0f, this->_win_h / 2.0);
+	this->_player._sprite = "[";
 	this->displayMenu();
 	nodelay(stdscr, true);
 	init_color(COLOR_RED, 250, 250, 250);
@@ -84,7 +87,7 @@ void			Engine::spawn(void)
 	Enemy		e;
 
 	//               0 est a gauche pour w      et 0 est top  pour h
-	e._pos = Vect2(this->_win_w, rand() % this->_win_h - 1);
+	e._pos = Vect2(this->_win_w, rand() % (this->_win_h - 100));
 	e._dir = Vect2(-1, 0);
 	e._level = rand() % this->_level + 1;
 }
@@ -162,6 +165,7 @@ void			Engine::processEnemies(void)
 			this->_player.score(e->_level * 100);
 			j = i;
 			i = i->_next;
+			std::cout<< "Deleting enemy" << std::endl;
 			Enemy::lst.pop(j);
 			continue ;
 		}
@@ -178,16 +182,14 @@ void			Engine::processEnemies(void)
 
 void			Engine::process(void)
 {
-	if (this->_count % (((rand() % 200) + 200) / this->_level) == 0)
+	_count++;
+	if ((this->_count % 10000) == 0)
 		spawn();
-	if (this->_count % (10000 * this->_level) == 0)
+	if (this->_count % (50000 * this->_level) == 0)
 	{
 		this->_count = 0;
 		this->_level++;
 	}
-	if (this->_player.getScore() % (10000 * this->_player.getLevel()))
-		this->_player.levelUp();
-	this->_player.process(0.2);
 	this->processEnemies();
 	this->processProjectiles();
 }
@@ -228,13 +230,18 @@ void			Engine::displayObject(GameObject *obj) const {
 	// x - half of string size ?
 	// is actual pos on the left of the sprite or middle when using multiple chars?
 	if (obj->_state != STATE_DEAD)
+	{
 		mvprintw(obj->_pos._y, obj->_pos._x, obj->_sprite.c_str());
+	}
 	return;
 }
 
 void			Engine::displayHud(void) const {
 	//display score
-	mvprintw(this->_win_h - 1 , 0, "score: %d",  this->_score);
+	mvprintw(this->_win_h - 1 , 0, "score: %d", this->_score);
+	mvprintw(this->_win_h - 1 , 40, "enemies: %d", Enemy::lst._size);
+	mvprintw(this->_win_h - 1 , 70, "count: %d", _count);
+	mvprintw(this->_win_h - 1 , 100, "level: %d", _level);
 	mvprintw(this->_win_h - 1 , this->_win_w - 12, "esc to quit");
 	return;
 }

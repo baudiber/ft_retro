@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:58:17 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 06:42:37 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 06:49:07 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 Enemy::Enemy(void) : _level(1)
 {
-	std::cout << "Creating Default Enemy" << std::endl;
 	this->lst.push(this);
 	this->_sprite = "oO";
 	return ;
@@ -22,7 +21,6 @@ Enemy::Enemy(void) : _level(1)
 
 Enemy::Enemy(Enemy const & src) : _level(src._level)
 {
-	std::cout << "Creating Enemy by copy" << std::endl;
 	this->_pos = src._pos;
 	this->_dir = src._dir;
 	this->_sprite = src._sprite;
