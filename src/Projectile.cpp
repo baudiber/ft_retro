@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 13:59:23 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 09:12:30 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 20:38:12 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ Projectile::Projectile(void) : _source(NULL)
 	return ;
 }
 
-Projectile::Projectile(Projectile const & src) : \
+Projectile::Projectile(Projectile const & src) : GameObject(src), \
 _source(src._source)
 {
 	this->lst << this;

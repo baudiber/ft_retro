@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 12:39:31 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 20:19:58 by roddavid         ###   ########.fr       */
+/*   Updated: 2019/12/15 20:38:40 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Player::Player(void) : _name("PLAYER ONE"), _lives(5), _level(1), _score(0)
 	return ;
 }
 
-Player::Player(Player const & src) : _name(src._name), _lives(src._lives), \
+Player::Player(Player const & src) : GameEntity(src), _name(src._name), _lives(src._lives), \
 _level(src._level), _score(src._score)
 {
 	this->_dir = src._dir;
