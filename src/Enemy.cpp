@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:58:17 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 20:39:01 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 22:38:22 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,13 @@ void			Enemy::attack(void)
 {
 	Projectile	*p;
 
+	//p = new Projectile(this);
 	p = new Projectile(this);
-	p->_speed = 2;
+  	p->_dir = Vect2(-1, 0);
+  	p->_pos = this->_pos;
+  	p->_pos._x = this->_pos._x - 4;
+	p->_speed = 0.5;
+	p->_sprite = "(";
 	p->setDamage(10 * this->_level);
 	return ;
 }
