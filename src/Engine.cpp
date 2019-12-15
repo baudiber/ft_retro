@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 17:22:06 by baudiber         ###   ########.fr       */
+/*   Updated: 2019/12/15 17:54:42 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void			Engine::run(void) {
 			break;
 		if (_player._state == STATE_DEAD)
 			break;
-		usleep(2000);
-		std::cout << k << std::endl;
+		usleep(SLEEP);
+		//std::cout << k << std::endl;
 		// process input
 		this->process();
 		this->render();
