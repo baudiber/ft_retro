@@ -90,34 +90,29 @@ void			Engine::spawn(void)
 void			Engine::processProjectile(Projectile *p)
 {
 	Elem		*i;
-	Elem		*j;
 	Enemy		*e;
 
 	i = Enemy::lst._first;
-	while (i)
+	while (i && p->_state != STATE_DEAD)
 	{
 		e = reinterpret_cast<Enemy*>(i->_data);
-		if (p->_source != e && p->collide(e))
+		if (p->collide(e))
 		{
 			if (p->_source == &this->_player)
 				this->_player.score(10);
 			e->takeDamage(p->_damage);
-			j = i;
-			i = i->_next;
-			Projectile::lst.pop(j);
-			return ;
+			p->_state = STATE_DEAD;
 		}
 		i = i->_next;
 	}
-	if (p->_pos._x > this->_win_w || p->_pos._x < 0 || \
-	p->_pos._y > this->_win_h || p->_pos._y < 0)
+	if (p->_pos._x > this->_win_w - 1 || p->_pos._x < 0 || \
+	p->_pos._y > this->_win_h - 1 || p->_pos._y < 0)
 		Projectile::lst.pop(p);
 }
 
 void			Engine::processProjectiles(void)
 {
 	Elem		*i;
-	Elem		*j;
 	Projectile	*p;
 
 	i = Projectile::lst._first;
@@ -125,15 +120,6 @@ void			Engine::processProjectiles(void)
 	{
 		i->_data->process(0.1);
 		p = reinterpret_cast<Projectile*>(i->_data);
-		if (p->_source != &this->_player && \
-		this->_player.collide(&this->_player))
-		{
-			this->_player.takeDamage(p->_damage);
-			j = i;
-			i = i->_next;
-			Projectile::lst.pop(j);
-			continue ;
-		}
 		processProjectile(p);
 		i = i->_next;
 	}
@@ -160,7 +146,6 @@ void			Engine::processEnemies(void)
 			this->_player.score(e->_level * 100);
 			j = i;
 			i = i->_next;
-			std::cout<< "Deleting enemy" << std::endl;
 			Enemy::lst.pop(j);
 			continue ;
 		}

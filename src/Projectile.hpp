@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 13:59:42 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 15:40:34 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 20:18:22 by roddavid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ class Projectile : public GameObject
 		void			setDamage(int amount);
 		Projectile		&operator=(Projectile const &rh);
 		~Projectile();
-		void			process(float const t);
 };
 
 #endif

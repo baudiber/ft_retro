@@ -33,6 +33,7 @@ class Player : public GameEntity
 		int				getLevel() const;
 		void			takeDamage(int value);
 		void			levelUp();
+		void			fire();
 		void			input(int key);
 		void			process(float const t);
 		Player(void);

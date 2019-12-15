@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:46:35 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 14:12:24 by baudiber         ###   ########.fr       */
+/*   Updated: 2019/12/15 20:37:48 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ _ep_max(100)
 	return ;
 }
 
-GameEntity::GameEntity(GameEntity const &src) : _hp(src._hp), _hp_max(0), \
+GameEntity::GameEntity(GameEntity const &src) : GameObject(src), _hp(src._hp), _hp_max(0), \
 _ep(src._ep), _ep_max(src._ep_max)
 {
+
 	return ;
 }
 

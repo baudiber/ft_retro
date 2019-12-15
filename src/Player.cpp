@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 12:39:31 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 09:30:14 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 20:38:40 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Player::Player(void) : _name("PLAYER ONE"), _lives(5), _level(1), _score(0)
 	return ;
 }
 
-Player::Player(Player const & src) : _name(src._name), _lives(src._lives), \
+Player::Player(Player const & src) : GameEntity(src), _name(src._name), _lives(src._lives), \
 _level(src._level), _score(src._score)
 {
 	this->_dir = src._dir;
@@ -59,6 +59,12 @@ void			Player::score(int value)
 	this->_score += value;
 }
 
+void			Player::fire() {
+	Projectile   *p= new Projectile(this);
+  	p->_pos = this->_pos;
+  	p->_dir = Vect2(2, 0);
+}
+
 void			Player::takeDamage(int value)
 {
 	this->_hp -= value;
@@ -91,8 +97,8 @@ void		Player::input(int key) {
 		this->_mov._x = 1;
 	else if (key == KEY_ARROW_LEFT)
 		this->_mov._x = -1;
-//	if (key == KEY_SPACE)
-//		Projectile(this);
+	if (key == KEY_SPACE)
+		this->fire();
 }
 
 void			Player::setSpawn(Vect2 const &v) {
