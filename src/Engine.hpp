@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:50:27 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/14 14:09:48 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 20:17:29 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 class Engine
 {
 	private:
+
 		int					_count;
 		int					_win_w;
 		int					_win_h;
@@ -50,11 +51,15 @@ class Engine
 		static Player		_player;
 		static std::string	level;
 		int					get();
-		
+  
+		void			run(void);
+		void			error(std::string const & msg);
+		void			gameOver(void);
+
 		void				process(void);
 		void				render(void) const;
 		void				displayMenu(void) const;
-		void				run(void) const;
+
 };
 
 #endif

@@ -6,13 +6,14 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/14 15:41:56 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/14 20:17:28 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Engine.hpp"
 
-Engine::Engine(void) {
+
+Engine::Engine(void) : _enemy_nb(0), _projectile_nb(0) , _score(0) {
 	std::cout << "Engine Default constructor called" << std::endl;
 	this->_win = initscr();
 	this->_level = 1;
@@ -20,7 +21,8 @@ Engine::Engine(void) {
 	noecho();
 	curs_set(0);
 	getmaxyx(this->_win, this->_win_h, this->_win_w);
-	//if (this->//
+    if (this->_win_h <= 20 || this->_win_w <= 100) 
+		this->error("Please enlarge your window");
 	this->displayMenu();
 	nodelay(stdscr, true);
 	init_color(COLOR_RED, 250, 250, 250);
@@ -56,11 +58,21 @@ Engine &		Engine::operator=(Engine const & rhs) {
 	return *this;
 }
 
-void			Engine::run(void) const {
+
+//void			Engine::addProjectile(Weapon *w) {
+//
+//}
+
+void			Engine::run(void) {
+	int k = 0;
+
 	for (;;)
 	{
 		//check for game over
 		//to break
+		if ((k = getch()) == KEY_ESC)
+			this->gameOver();
+
 
 		this->render();
 	}
@@ -173,6 +185,10 @@ void			Engine::process(void)
 void			Engine::render(void) const {
 	clear();
 
+	//display score
+	mvprintw(this->_win_h - 1 , 0, "score: %d", nb );
+	mvprintw(this->_win_h - 1 , this->_win_w - 12, "esc to quit");
+
 	attron(A_BOLD); // display player and enemies in BOLD
 
 	//display Player		
@@ -196,13 +212,22 @@ void			Engine::render(void) const {
 	refresh();	
 }
 
-// void			Engine::displayMenu(void) const {
-// 	clear();
-// 	mvprintw(y / 2, x / 2, "FT_RETRO");
-// 	refresh();
-// 	int c;
-// 	for (;;)
-// 		if ((c = getch()) == KEY_SPACE)
-// 			break;
-// }
+void			Engine::displayMenu(void) const {
+	clear();
+	mvprintw(this->_win_h * 0.3, this->_win_w / 2 - 4, "FT_RETRO");
+	mvprintw(this->_win_h * 0.7, this->_win_w / 2 - 2 , "[ _ ]");
+	mvprintw(this->_win_h * 0.7 + 3, this->_win_w / 2 - 5, "press space");
+	refresh();
+	int c;
+	for (;;)
+		if ((c = getch()) == KEY_SPACE)
+			break;
+}
 
+void			Engine::error(std::string const & msg) {
+
+}
+
+void			Engine::gameOver(void) {
+
+}
