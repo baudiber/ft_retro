@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 13:59:23 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 06:42:19 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 09:12:30 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 Projectile::Projectile(void) : _source(NULL)
 {
+	this->_mov = Vect2(0, 0);
+	this->_dir = Vect2(2, 0);
+	this->_pos = Vect2(2, 2);
 	this->lst << this;
 	this->_sprite = "-=-";
 	return ;

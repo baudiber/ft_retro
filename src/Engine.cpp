@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 09:08:26 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 09:13:05 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ void			Engine::processEnemies(void)
 void			Engine::process(void)
 {
 	_count++;
-	if ((this->_count % 10000) == 0)
+	if ((this->_count % 1000) == 0)
 		spawn();
 	if (this->_count % (50000 * this->_level) == 0)
 	{
