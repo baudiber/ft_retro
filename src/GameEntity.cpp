@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:46:35 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 04:20:25 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 14:12:24 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ GameEntity			GameEntity::operator=(GameEntity const &rh)
 char				GameEntity::actualSprite()
 {
 	return (this->_sprite[(int)(this->_step) % (this->_sprite.length() - 1)]);
+}
+
+int					GameEntity::getHp()
+{
+	return (this->_hp);
 }
 
 void				GameEntity::takeDamage(int amount)

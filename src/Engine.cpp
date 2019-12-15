@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 04:31:50 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 14:11:48 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,14 @@ void			Engine::processEnemies(void)
 		{
 			this->_player.takeDamage(20);
 			e->takeDamage(20);
+		}
+		if (e->getHp() <= 0)
+		{
+			this->_player.score(e->_level * 100);
+			j = i;
+			i = i->_next;
+			Enemy::lst.pop(j);
+			continue ;
 		}
 		if (e->_pos._x < 0)
 		{
