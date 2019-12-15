@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 17:54:42 by baudiber         ###   ########.fr       */
+/*   Updated: 2019/12/15 09:08:26 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void			Engine::processEnemies(void)
 	i = Enemy::lst._first;
 	while (i)
 	{
-		i->_data->process(0.1);
+		i->_data->process(0.001);
 		e = reinterpret_cast<Enemy*>(i->_data);
 		if (i->_data->collide(&this->_player))
 		{
@@ -186,6 +186,7 @@ void			Engine::process(void)
 		this->_count = 0;
 		this->_level++;
 	}
+	this->_player.process(0.002);
 	this->processEnemies();
 	this->processProjectiles();
 }
