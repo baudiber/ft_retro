@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:58:17 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 20:39:01 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 12:14:06 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 Enemy::Enemy(void) : _level(1)
 {
 	this->lst.push(this);
-	this->_sprite = "oO";
+	this->_sprite = "oOoOo";
+	this->_hp = 50;
 	return ;
 }
 
