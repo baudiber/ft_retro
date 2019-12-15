@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 08:34:59 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 08:55:53 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ void			Engine::processEnemies(void)
 void			Engine::process(void)
 {
 	_count++;
-	if ((this->_count % 1000) == 0)
+	if ((this->_count % 5000) == 0)
 		spawn();
 	if (this->_count % (1000000 * this->_level) == 0)
 	{
@@ -242,7 +242,6 @@ void			Engine::displayHud(void) const {
 	mvprintw(this->_win_h - 1 , 0, "score: %d", this->_score);
 	mvprintw(this->_win_h - 1 , 40, "enemies: %d", Enemy::lst._size);
 	mvprintw(this->_win_h - 1 , 70, "lives: %d", this->_player.getLives());
-	mvprintw(this->_win_h - 1 , 100, "level: %d", _level);
 	mvprintw(this->_win_h - 1 , 100, "level: %d", _level);
 	mvprintw(this->_win_h - 1 , this->_win_w - 12, "esc to quit");
 	return;
