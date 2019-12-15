@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 11:56:58 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 12:13:17 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void			Engine::spawn(void)
 	e->_pos = Vect2(this->_win_w - 1, rand() % (this->_win_h));
 	e->_dir = Vect2(-1, 0);
 	e->_level = rand() % this->_level + 1;
+	e->_speed *= e->_level;
 }
 
 void			Engine::processProjectile(Projectile *p)
@@ -98,7 +99,7 @@ void			Engine::processProjectile(Projectile *p)
 		if (p->collide(e))
 		{
 			if (p->_source == &this->_player)
-				this->_player.score(10);
+				this->_player.score(10 * e->_level);
 			e->takeDamage(p->_damage);
 			p->_state = STATE_DEAD;
 		}
@@ -162,12 +163,13 @@ void			Engine::processEnemies(void)
 void			Engine::process(void)
 {
 	_count++;
-	if ((this->_count % 1000) == 0)
+	if ((this->_count % (5000 / _level)) == 0)
 		spawn();
 	if (this->_count % (50000 * this->_level) == 0)
 	{
 		this->_count = 0;
-		this->_level++;
+		if (this->_level < 5)
+			this->_level++;
 	}
 	this->_player.process(0.002);
 	_player._pos._x = (_player._pos._x < 0 ? 0 : _player._pos._x);
