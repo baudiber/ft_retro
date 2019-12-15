@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 12:39:44 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 18:01:19 by roddavid         ###   ########.fr       */
+/*   Updated: 2019/12/15 20:20:08 by roddavid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ class Player : public GameEntity
 		int				getLevel() const;
 		void			takeDamage(int value);
 		void			levelUp();
+		void			fire();
 		void			input(int key);
 		void			process(float const t);
 		Player(void);

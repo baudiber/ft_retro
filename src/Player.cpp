@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 12:39:31 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 09:30:14 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 20:19:58 by roddavid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ void			Player::score(int value)
 	this->_score += value;
 }
 
+void			Player::fire() {
+	Projectile   *p= new Projectile(this);
+  	p->_pos = this->_pos;
+  	p->_dir = Vect2(2, 0);
+}
+
 void			Player::takeDamage(int value)
 {
 	this->_hp -= value;
@@ -88,8 +94,8 @@ void		Player::input(int key) {
 		this->_mov._x = 1;
 	else if (key == KEY_ARROW_LEFT)
 		this->_mov._x = -1;
-//	if (key == KEY_SPACE)
-//		Projectile(this);
+	if (key == KEY_SPACE)
+		this->fire();
 }
 
 std::string		Player::getName() const
