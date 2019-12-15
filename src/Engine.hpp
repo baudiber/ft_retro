@@ -18,6 +18,8 @@
 # include "Projectile.hpp"
 # include "Player.hpp"
 # include "Vect2.hpp"
+# include "bindings.hpp"
+# include "ncurses.h"
 
 # define MAX_ENEMY		256
 # define MAX_PROJECT	256
@@ -29,6 +31,7 @@ class Engine
 		int					_count;
 		int					_win_w;
 		int					_win_h;
+		int					_score;
 		static int			_level;
 		WINDOW*				_win;
 		void				spawn(void);
@@ -53,10 +56,12 @@ class Engine
 		void			run(void);
 		void			error(std::string const & msg);
 		void			gameOver(void);
+		void			displayObject(GameObject *) const;
 
 		void				process(void);
 		void				render(void) const;
 		void				displayMenu(void) const;
+		void				displayHud(void) const;
 
 };
 
