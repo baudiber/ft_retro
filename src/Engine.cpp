@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 18:04:14 by roddavid         ###   ########.fr       */
+/*   Updated: 2019/12/15 18:19:05 by roddavid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,9 @@ void			Engine::run(void) {
 			break;
 		if (_player._state == STATE_DEAD)
 			break;
-		usleep(20);
 		_player.input(k);
 		_player.process(0.1);
-		std::cout << k << std::endl;
-		// process input
+		usleep(SLEEP);
 		this->process();
 		this->render();
 	}
@@ -151,7 +149,7 @@ void			Engine::processEnemies(void)
 	i = Enemy::lst._first;
 	while (i)
 	{
-		i->_data->process(0.1);
+		i->_data->process(0.001);
 		e = reinterpret_cast<Enemy*>(i->_data);
 		if (i->_data->collide(&this->_player))
 		{
@@ -181,13 +179,14 @@ void			Engine::processEnemies(void)
 void			Engine::process(void)
 {
 	_count++;
-	if ((this->_count % 10000) == 0)
+	if ((this->_count % 1000) == 0)
 		spawn();
 	if (this->_count % (50000 * this->_level) == 0)
 	{
 		this->_count = 0;
 		this->_level++;
 	}
+	this->_player.process(0.002);
 	this->processEnemies();
 	this->processProjectiles();
 }

@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 12:39:31 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 18:15:43 by roddavid         ###   ########.fr       */
+/*   Updated: 2019/12/15 18:18:22 by roddavid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 Player::Player(void) : _name("PLAYER ONE"), _lives(5), _level(1), _score(0)
 {
-	this->_dir = Vect2(1, 0);
+	this->_mov = Vect2(0, 0);
+	this->_dir = Vect2(0, 0);
 	this->_pos = Vect2(2, 2);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 11:50:27 by mbuch             #+#    #+#             */
-/*   Updated: 2019/12/15 07:56:22 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 17:54:41 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define MAX_ENEMY		256
 # define MAX_PROJECT	256
+# define SLEEP	100
 
 class Engine
 {
