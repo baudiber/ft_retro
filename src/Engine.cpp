@@ -6,14 +6,14 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/14 20:17:28 by baudiber         ###   ########.fr       */
+/*   Updated: 2019/12/15 13:52:22 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Engine.hpp"
 
 
-Engine::Engine(void) : _enemy_nb(0), _projectile_nb(0) , _score(0) {
+Engine::Engine(void) : _score(0) {
 	std::cout << "Engine Default constructor called" << std::endl;
 	this->_win = initscr();
 	this->_level = 1;
@@ -52,8 +52,6 @@ Engine &		Engine::operator=(Engine const & rhs) {
 		this->_level = rhs._level;
 		this->_win_w = rhs._win_w;
 		this->_win_h = rhs._win_h;
-		this->_enemy_nb = rhs._enemy_nb;
-		this->_projectile_nb = rhs._projectile_nb;
 	}
 	return *this;
 }
@@ -185,29 +183,19 @@ void			Engine::process(void)
 void			Engine::render(void) const {
 	clear();
 
-	//display score
-	mvprintw(this->_win_h - 1 , 0, "score: %d", nb );
-	mvprintw(this->_win_h - 1 , this->_win_w - 12, "esc to quit");
 
+	displayHud();
+	
 	attron(A_BOLD); // display player and enemies in BOLD
 
-	//display Player		
-	move(this->_player._pos._y, this->_player._pos._y);
-	addch(this->_player.actualSprite());
+	displayObject(&_player);
+	
+	for (Elem* i = Enemy::lst._first; i != 0; i = i->_next)
+		displayObject(i->_data);
 
-	//display enemies
-	for (int i = 0; i < this->_enemy_nb; i++)
-	{
-		move(this->_enemies[i]._pos._y, this->_enemies[i]._pos._y);
-		addch(this->_enemies[i]._sprite[0]);
-	}
 	attroff(A_BOLD);
-	//display projectiles
-	for (int i = 0; i < this->_projectile_nb; i++)
-	{
-		move(this->_projectiles[i]._pos._y, this->_projectiles[i]._pos._y);
-		addch(this->_projectiles[i]._sprite[0]);
-	}
+	for (Elem* i = Projectile::lst._first; i != 0; i = i->_next)
+		displayObject(i->_data);
 	
 	refresh();	
 }
@@ -224,8 +212,26 @@ void			Engine::displayMenu(void) const {
 			break;
 }
 
-void			Engine::error(std::string const & msg) {
+void			Engine::displayObject(GameObject *obj) const {
+	// x - half of string size ?
+	// is actual pos on the left of the sprite or middle when using multiple chars?
+	if (obj->_state != STATE_DEAD)
+		mvprintw(obj->_pos._y, obj->_pos._x, obj->_sprite.c_str());
+	return;
+}
 
+void			Engine::displayHud(void) const {
+	//display score
+	mvprintw(this->_win_h - 1 , 0, "score: %d",  this->_score);
+	mvprintw(this->_win_h - 1 , this->_win_w - 12, "esc to quit");
+	return;
+}
+
+
+void			Engine::error(std::string const & msg) {
+	std::cout << msg << std::endl;
+	//EXIT
+	return;
 }
 
 void			Engine::gameOver(void) {
