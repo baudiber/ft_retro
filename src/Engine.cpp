@@ -82,6 +82,7 @@ void			Engine::spawn(void)
 {
 	Enemy		e;
 
+	//               0 est a gauche pour w      et 0 est top  pour h
 	e._pos = Vect2(this->_win_w, rand() % this->_win_h - 1);
 	e._dir = Vect2(-1, 0);
 	e._level = rand() % this->_level + 1;
