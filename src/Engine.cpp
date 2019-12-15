@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 14:11:48 by baudiber         ###   ########.fr       */
+/*   Updated: 2019/12/15 06:44:06 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,3 +248,6 @@ void			Engine::error(std::string const & msg) {
 void			Engine::gameOver(void) {
 
 }
+
+int					Engine::_level = 1;
+Player				Engine::_player = Player();
