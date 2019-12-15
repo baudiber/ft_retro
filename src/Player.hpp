@@ -24,6 +24,7 @@ class Player : public GameEntity
 		int				_lives;
 		int				_level;
 		int				_score;
+		Vect2			_spawn;
 	public:
 		int				getScore() const;
 		void			score(int value);
@@ -38,6 +39,9 @@ class Player : public GameEntity
 		Player(Player const &src);
 		Player			&operator=(Player &rh);
 		~Player();
+
+		void			setSpawn(Vect2 const &);
+		void			resetPos(void);
 };
 
 #endif

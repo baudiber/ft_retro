@@ -22,8 +22,7 @@ Engine::Engine(void) {
 	cbreak();
 	curs_set(0);
 	getmaxyx(this->_win, this->_win_h, this->_win_w);
-	//this->_player.setSpawn(Vect2(5.0f, this->_win_h / 2.0));
-	this->_player._pos = Vect2(5.0f, this->_win_h / 2.0);
+	this->_player.setSpawn(Vect2(5.0f, this->_win_h / 2.0));
 	this->_player._sprite = "[";
 	this->displayMenu();
 	nodelay(stdscr, true);
@@ -83,7 +82,7 @@ void			Engine::spawn(void)
 {
 	Enemy		*e = new Enemy();
 
-	e->_pos = Vect2(this->_win_w - 1, rand() % (this->_win_h));
+	e->_pos = Vect2(this->_win_w - 1, rand() % (this->_win_h - 2));
 	e->_dir = Vect2(-1, 0);
 	e->_level = rand() % this->_level + 1;
 }
