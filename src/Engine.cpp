@@ -6,19 +6,20 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 08:55:53 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 09:03:07 by mbuch            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Engine.hpp"
 
-Engine::Engine(void) : _score(0) {
+Engine::Engine(void) {
 	std::cout << "Engine Default constructor called" << std::endl;
 	this->_win = initscr();
 	this->_level = 1;
 	this->_count = 0;
 	keypad(this->_win, true);
 	noecho();
+	cbreak();
 	curs_set(0);
 	getmaxyx(this->_win, this->_win_h, this->_win_w);
     if (this->_win_h <= 20 || this->_win_w <= 100) 
@@ -40,7 +41,7 @@ Engine::Engine(Engine const & src) {
 }
 
 Engine::~Engine(void) {
-	std::cout << "Engine Destructor called" << std::endl;
+	//std::cout << "Engine Destructor called" << std::endl;
 	nodelay(stdscr, false);
 	getch();
 	endwin();
@@ -58,11 +59,6 @@ Engine &		Engine::operator=(Engine const & rhs) {
 	return *this;
 }
 
-
-//void			Engine::addProjectile(Weapon *w) {
-//
-//}
-
 void			Engine::run(void) {
 	int k = 0;
 
@@ -71,20 +67,22 @@ void			Engine::run(void) {
 		//check for game over
 		//to break
 		if ((k = getch()) == KEY_ESC)
-			this->gameOver();
+			break;
 		if (_player._state == STATE_DEAD)
-			this->gameOver();
+			break;
+		usleep(2000);
+		std::cout << k << std::endl;
 		// process input
 		this->process();
 		this->render();
 	}
+	this->gameOver();
 }
 
 void			Engine::spawn(void)
 {
 	Enemy		*e = new Enemy();
 
-	//               0 est a gauche pour w      et 0 est top  pour h
 	e->_pos = Vect2(this->_win_w - 1, rand() % (this->_win_h));
 	e->_dir = Vect2(-1, 0);
 	e->_level = rand() % this->_level + 1;
@@ -181,16 +179,13 @@ void			Engine::processEnemies(void)
 void			Engine::process(void)
 {
 	_count++;
-	if ((this->_count % 5000) == 0)
+	if ((this->_count % 1000) == 0)
 		spawn();
-	if (this->_count % (1000000 * this->_level) == 0)
+	if (this->_count % (50000 * this->_level) == 0)
 	{
 		this->_count = 0;
 		this->_level++;
 	}
-	if (this->_player.getScore() % (10000 * this->_player.getLevel()))
-		this->_player.levelUp();
-	this->_player.process(0.002);
 	this->processEnemies();
 	this->processProjectiles();
 }
@@ -239,9 +234,9 @@ void			Engine::displayObject(GameObject *obj) const {
 
 void			Engine::displayHud(void) const {
 	//display score
-	mvprintw(this->_win_h - 1 , 0, "score: %d", this->_score);
+	mvprintw(this->_win_h - 1 , 0, "score: %d", this->_player.getScore());
 	mvprintw(this->_win_h - 1 , 40, "enemies: %d", Enemy::lst._size);
-	mvprintw(this->_win_h - 1 , 70, "lives: %d", this->_player.getLives());
+	mvprintw(this->_win_h - 1 , 70, "count: %d", _count);
 	mvprintw(this->_win_h - 1 , 100, "level: %d", _level);
 	mvprintw(this->_win_h - 1 , this->_win_w - 12, "esc to quit");
 	return;
@@ -255,7 +250,9 @@ void			Engine::error(std::string const & msg) {
 }
 
 void			Engine::gameOver(void) {
-
+	clear();
+	mvprintw(this->_win_h * 0.5, this->_win_w * 0.5 - 4, "Game Over");
+	refresh();
 }
 
 int					Engine::_level = 1;

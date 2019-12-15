@@ -31,7 +31,6 @@ class Engine
 		int					_count;
 		int					_win_w;
 		int					_win_h;
-		int					_score;
 		static int			_level;
 		WINDOW*				_win;
 		void				spawn(void);
@@ -53,10 +52,10 @@ class Engine
 		static std::string	level;
 		int					get();
   
-		void			run(void);
-		void			error(std::string const & msg);
-		void			gameOver(void);
-		void			displayObject(GameObject *) const;
+		void				run(void);
+		void				error(std::string const & msg);
+		void				gameOver(void);
+		void				displayObject(GameObject *) const;
 
 		void				process(void);
 		void				render(void) const;
