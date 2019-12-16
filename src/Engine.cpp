@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 12:13:17 by mbuch            ###   ########.fr       */
+/*   Updated: 2019/12/15 22:39:38 by baudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			Engine::run(void) {
 		if (_player._state == STATE_DEAD)
 			break;
 		_player.input(k);
-		_player.process(0.1);
+		_player.process(1);
 		usleep(SLEEP);
 		this->process();
 		this->render();
@@ -130,6 +130,14 @@ void			Engine::processProjectiles(void)
 	{
 		i->_data->process(0.1);
 		p = reinterpret_cast<Projectile*>(i->_data);
+		if (p->collide(&this->_player))
+		{
+			if (p->_source != &this->_player)
+			{
+				this->_player.takeDamage(p->_damage);
+				p->_state = STATE_DEAD;
+			}
+		}
 		processProjectile(p);
 		i = i->_next;
 	}
@@ -166,8 +174,11 @@ void			Engine::processEnemies(void)
 	i = Enemy::lst._first;
 	while (i)
 	{
+		int	nb = rand() % 5000;
 		i->_data->process(0.001);
 		e = reinterpret_cast<Enemy*>(i->_data);
+		if (nb == 4)
+			e->attack();
 		if (e->_level == 1)
 			e->_sprite = "O";
 		if (e->_level == 2)
