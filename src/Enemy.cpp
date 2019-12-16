@@ -15,7 +15,8 @@
 Enemy::Enemy(void) : _level(1)
 {
 	this->lst.push(this);
-	this->_sprite = "oO";
+	this->_sprite = "oOoOo";
+	this->_hp = 50;
 	return ;
 }
 
@@ -44,7 +45,6 @@ void			Enemy::attack(void)
 {
 	Projectile	*p;
 
-	//p = new Projectile(this);
 	p = new Projectile(this);
   	p->_dir = Vect2(-1, 0);
   	p->_pos = this->_pos;
