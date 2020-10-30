@@ -6,7 +6,7 @@
 /*   By: mbuch <mbuch@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 15:19:16 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 22:39:38 by baudiber         ###   ########.fr       */
+/*   Updated: 2020/10/30 23:54:14 by baudibert        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Engine::Engine(void) {
 	curs_set(0);
 	getmaxyx(this->_win, this->_win_h, this->_win_w);
 	this->_player.setSpawn(Vect2(5.0f, this->_win_h / 2.0));
-	this->_player._sprite = "[";
+	this->_player._sprite = "(<=>)";
 	this->displayMenu();
 	nodelay(stdscr, true);
 	init_color(COLOR_RED, 250, 250, 250);

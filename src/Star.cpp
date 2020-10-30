@@ -6,7 +6,7 @@
 /*   By: baudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/15 21:27:04 by baudiber          #+#    #+#             */
-/*   Updated: 2019/12/15 21:36:26 by baudiber         ###   ########.fr       */
+/*   Updated: 2020/10/30 23:52:56 by baudibert        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Star::Star(void) {
 	this->lst.push(this);
-	this->_sprite = ".";
+	this->_sprite = "-";
 	return ;
 }
 
